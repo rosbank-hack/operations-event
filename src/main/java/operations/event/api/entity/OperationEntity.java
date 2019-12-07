@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -20,9 +21,9 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "operation")
 @Accessors(chain = true)
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+@Table(name = "operation", uniqueConstraints = @UniqueConstraint(columnNames = {"operation_id", "service"}))
 public class OperationEntity
         implements Serializable {
 
@@ -65,6 +66,9 @@ public class OperationEntity
 
     @Column(name = "extra")
     private String extra;
+
+    @Column(name = "ready")
+    private boolean ready;
 
     @Override
     public boolean equals(Object o) {
@@ -109,6 +113,7 @@ public class OperationEntity
                 .add("amount", amount)
                 .add("currency", currency)
                 .add("mcc", mcc)
+                .add("ready", ready)
                 .toString();
     }
 }
