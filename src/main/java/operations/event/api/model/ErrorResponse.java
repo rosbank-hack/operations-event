@@ -1,4 +1,4 @@
-package ros.hack.operations.event.model;
+package operations.event.api.model;
 
 import lombok.Data;
 

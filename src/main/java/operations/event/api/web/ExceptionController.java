@@ -1,4 +1,4 @@
-package ros.hack.operations.event.web;
+package operations.event.api.web;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-import ros.hack.operations.event.model.ErrorResponse;
+import operations.event.api.model.ErrorResponse;
 
 import javax.annotation.Nonnull;
 import javax.persistence.EntityNotFoundException;

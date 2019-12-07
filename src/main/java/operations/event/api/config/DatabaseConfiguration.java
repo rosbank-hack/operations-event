@@ -1,4 +1,4 @@
-package ros.hack.operations.event.config;
+package operations.event.api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableJpaAuditing(dateTimeProviderRef = "dateTimeProvider")
-@EnableJpaRepositories(basePackages = "ros.hack.providers.api.repository")
+@EnableJpaRepositories(basePackages = "operations.event.api.repository")
 public class DatabaseConfiguration {
 
     @Bean

@@ -26,6 +26,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-logging"
     implementation 'org.springframework.kafka:spring-kafka'
+    compile group: 'com.vladmihalcea', name: 'hibernate-types-52', version: '1.0.0'
 
     implementation "com.github.voteva:operation-history-model:1.0.1-SNAPSHOT"
 

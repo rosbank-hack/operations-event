@@ -1,4 +1,4 @@
-package ros.hack.operations.event.web;
+package operations.event.api.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
