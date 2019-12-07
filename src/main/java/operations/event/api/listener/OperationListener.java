@@ -2,7 +2,7 @@ package operations.event.api.listener;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import operations.event.api.service.EventParser;
+import operations.event.api.service.JsonParser;
 import operations.event.api.service.OperationService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -18,15 +18,11 @@ public class OperationListener implements Listener<String, String> {
     @KafkaListener(topics = "${spring.kafka.topic}")
     public void listen(ConsumerRecord<String, String> consumerRecord) {
 
-        log.info("Входящее сообщение: {}", consumerRecord.value());
-
-        // Оптимизация для высокой нагрузки
         if (log.isDebugEnabled()) {
-            log.debug("Входящее сообщение: {}", consumerRecord.value());
+            log.debug("Received record: {}", consumerRecord.value());
         }
 
-        EventParser.parse(consumerRecord.value())
-                .ifPresentOrElse(operationService::processMessage,
-                        () -> log.error("Не удалось дессериализовать объект"));
+        JsonParser jsonParser = new JsonParser();
+        operationService.processMessage(jsonParser.parse(consumerRecord.value()));
     }
 }

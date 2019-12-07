@@ -31,8 +31,7 @@ dependencies {
     implementation "com.github.voteva:operation-history-model:1.0.1-SNAPSHOT"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
-
-    implementation "redis.clients:jedis"
+    
     implementation "org.postgresql:postgresql"
 
     implementation "com.google.code.gson:gson:${gsonVersion}"
