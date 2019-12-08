@@ -2,12 +2,11 @@ package operations.event.api.repository;
 
 import operations.event.api.entity.OperationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
+import javax.annotation.Nonnull;
 
-@Repository
-public interface OperationRepository extends JpaRepository<OperationEntity, Long> {
+public interface OperationRepository
+        extends JpaRepository<OperationEntity, Long> {
 
-    Boolean existsByUserIdAndDate(String userId, LocalDateTime date);
+    boolean existsByServiceAndOperationId(@Nonnull String service, @Nonnull String operationId);
 }

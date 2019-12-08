@@ -1,11 +1,13 @@
 package operations.event.api.entity;
 
 import com.google.common.base.MoreObjects;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,9 +19,11 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "operation_params")
 @Accessors(chain = true)
-public class OperationParams implements Serializable {
+@Table(name = "operation_params")
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+public class OperationParams
+        implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)
@@ -42,11 +46,9 @@ public class OperationParams implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-
         if (o == null || getClass() != o.getClass()) return false;
 
         OperationParams that = (OperationParams) o;
-
         return new EqualsBuilder()
                 .append(id, that.id)
                 .append(service, that.service)

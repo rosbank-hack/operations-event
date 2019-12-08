@@ -18,7 +18,6 @@ import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -37,7 +36,7 @@ public class OperationEntity
     private String userId;
 
     @Column(name = "operation_id", nullable = false)
-    private UUID operationId;
+    private String operationId;
 
     @Column(name = "service", nullable = false)
     private String service;
