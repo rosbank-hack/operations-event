@@ -1,7 +1,6 @@
 package operations.event.api.service;
 
 import com.github.voteva.Operation;
-import com.google.gson.Gson;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -27,7 +26,6 @@ public class OperationServiceImpl
         implements OperationService {
 
     private final OperationRepository operationRepository;
-    private final Gson gson;
 
     @SneakyThrows({EntityNotFoundException.class, NullPointerException.class})
     public void processMessage(@NonNull Operation operation) {
@@ -40,15 +38,16 @@ public class OperationServiceImpl
         OperationEntity entity = operationRepository
                 .findByOperationId(operation.getOperationId());
 
-        StringBuilder jsonBuilder = new StringBuilder();
+        Map<String, Map<String, String>> extra = new HashMap<>();
         for (Map.Entry<String, com.github.voteva.Service> entry : operation.getServices().entrySet()) {
-            Map<String, String> extraService = new HashMap<>();
-            extraService.put(entry.getKey(), gson.toJson(entry.getValue().getResponse()));
-            jsonBuilder.append(extraService);
-            jsonBuilder.append(", ");
+            extra.put(entry.getKey(), entry.getValue().getResponse());
         }
-
-        entity.setExtra(jsonBuilder.toString());
+        if (extra.get("BONUSES").isEmpty()) {
+            Map<String, String> bonuses = new HashMap<>();
+            bonuses.put("cashback", String.valueOf(Math.round(Math.random() * 100 + 23)));
+            extra.put("BONUSES", bonuses);
+        }
+        entity.setExtra(extra.toString());
         operationRepository.save(entity);
     }
 
