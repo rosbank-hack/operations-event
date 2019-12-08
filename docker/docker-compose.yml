@@ -21,7 +21,7 @@ services:
 
   postgres:
     image: postgres:11
-    container_name: roshack-db
+    container_name: roshack
     environment:
       POSTGRES_USER: roshack
       POSTGRES_PASSWORD: roshack
