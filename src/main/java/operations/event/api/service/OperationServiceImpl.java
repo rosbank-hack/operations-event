@@ -38,8 +38,7 @@ public class OperationServiceImpl
             operationRepository.save(operationEntity);
         }
         OperationEntity entity = operationRepository
-                .findById(Long.parseLong(operation.getOperationId()))
-                .orElse(null);
+                .findByOperationId(operation.getOperationId());
 
         StringBuilder jsonBuilder = new StringBuilder();
         for (Map.Entry<String, com.github.voteva.Service> entry : operation.getServices().entrySet()) {
