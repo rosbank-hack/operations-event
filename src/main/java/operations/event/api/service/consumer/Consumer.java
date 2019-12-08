@@ -1,9 +1,7 @@
 package operations.event.api.service.consumer;
 
-import com.github.voteva.Operation;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 
-import java.util.List;
-
-public interface Consumer {
-    void consume(List<Operation> operations);
+public interface Consumer<K, V> {
+    void consume(ConsumerRecord<K, V> operations);
 }
